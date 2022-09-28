@@ -5,7 +5,7 @@ import {
   
 /**
  * @param {string}  data - A string param.
- * @returns {string} This is the result
+ * @return {string} This is the result
  */
 
   parentPort.once('message', (data) => {
