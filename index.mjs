@@ -1,16 +1,12 @@
-
 import {
-    execSync
-  } from 'node:child_process'
-  import {
     Worker
   } from 'node:worker_threads'
   
-  function getCurrentThreadCount() {
+//   function getCurrentThreadCount() {
 
-    // get all process
-    return parseInt(execSync(`ps -M ${process.pid} | wc -l`).toString())
-  }
+//     // get all process
+//     return parseInt(execSync(`ps -M ${process.pid} | wc -l`).toString())
+//   }
   
   function createThread(data) {
     const worker = new Worker('./thread.mjs')
@@ -24,15 +20,6 @@ import {
     worker.postMessage(data)
     return p;
   }
-  
-  
-  const nodejsDefaultThreadNumber = getCurrentThreadCount() - 1 // This 1 is relative an one process
-  
-  console.log(
-    `Running threads `,
-    `pid: ${process.pid}`,
-    `default threads: ${nodejsDefaultThreadNumber}`
-  )
   
 
   const allThreads = await Promise.all(
@@ -54,4 +41,6 @@ import {
       ]
   )
 
-  console.log("data", allThreads)
+  allThreads.forEach(data => {
+    console.log(data);
+  })
